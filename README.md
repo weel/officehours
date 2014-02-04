@@ -1,32 +1,60 @@
-EasyRTC Server Example
-======================
+# SimpleWebRTC - World's easiest WebRTC lib
 
-This folder contains all the files you'll need to create a simple server with EasyRTC, Express, and Socket.io. You can copy these files where you wish.
-
-Files and Folders:
-------------------
-
- - package.json - Provides project information allowing npm to find and install required modules.
- - server.js - Server code.
- - /static/ - Root folder for web server. Put html files here!
-
- 
-Installing Required Modules:
-----------------------------
-
- - Type `npm install` in console.
- - This will read the package.json file to find and install the required modules including EasyRTC, Express, and Socket.io.
- - Required modules will go into a new 'node_modules' subfolder
+Check out the demo: https://talky.io
 
 
-Running the Server:
--------------------
+## It's so easy:
 
- - Type `node server` in console.
+### 1. Some basic html
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://simplewebrtc.com/latest.js"></script> 
+        <style>
+            #remoteVideos video {
+                height: 150px;
+            }
+            #localVideo {
+                height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <video id="localVideo"></video>
+        <div id="remoteVideos"></div>
+    </body>
+</html>
+
+```
+
+### 1. Create our WebRTC object
+
+```js
+var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold "our" video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: 'remoteVideos',
+    // immediately ask for camera access
+    autoRequestMedia: true
+});
+```
+
+### 2. Tell it to join a room when ready
+
+```js
+// we have to wait until it's ready
+webrtc.on('readyToCall', function () {
+    // you can name it anything
+    webrtc.joinRoom('your awesome room name');
+});
+```
+
+### Available Options
 
 
-Viewing the examples:
----------------------
+`peerConnectionConfig` - Set this to specify your own STUN and TURN servers. SimpleWebRTC uses Google's public STUN server by default: `stun.l.google.com:19302`. It's intended for public use according to: https://twitter.com/HenrikJoreteg/status/354105684591251456
 
- - In your WebRTC enabled browser, visit your server address including the port. By default port 8080 is used.
- - http://localhost:8080/
+

@@ -1,20 +1,19 @@
-// Load required modules
-var http    = require("http");              // http server core module
-var express = require("express");           // web framework external module
-var io      = require("socket.io");         // web socket external module
-var easyrtc = require("easyrtc");           // EasyRTC external module
+// silly chrome wants SSL to do screensharing
+var fs = require('fs'),
+    express = require('express'),
+    https = require('https'),
+    http = require('http');
 
-// Setup and configure Express http server. Expect a subfolder called "static" to be the web root.
-var httpApp = express();
-httpApp.configure(function() {
-    httpApp.use(express.static(__dirname + "/static/"));
-});
 
-// Start Express http server on port 8080
-var webServer = http.createServer(httpApp).listen(80);
+var privateKey = fs.readFileSync('fakekeys/privatekey.pem').toString(),
+    certificate = fs.readFileSync('fakekeys/certificate.pem').toString();
 
-// Start Socket.io so it attaches itself to Express server
-var socketServer = io.listen(webServer, {"log level":1});
 
-// Start EasyRTC server
-var rtc = easyrtc.listen(httpApp, socketServer);
+var app = express();
+
+app.use(express.static(__dirname));
+
+https.createServer({key: privateKey, cert: certificate}, app).listen(8000);
+http.createServer(app).listen(8001);
+
+console.log('running on https://localhost:8000 and http://localhost:8001');
