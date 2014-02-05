@@ -14,6 +14,6 @@ var app = express();
 app.use(express.static(__dirname));
 
 //https.createServer({key: privateKey, cert: certificate}, app).listen(8000);
-http.createServer(app).listen(process.env.PORT);
+http.createServer(app).listen(process.env.PORT || 5000);
 
 console.log('running on https://localhost:8000 and http://localhost:8001');
