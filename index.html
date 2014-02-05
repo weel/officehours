@@ -154,26 +154,8 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
                 $('body').addClass('active');
             }
 
-            if (room) {
-                setRoom(room);
-            } else {
-                $('form').submit(function () {
-                    var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
-                    webrtc.createRoom(val, function (err, name) {
-                        console.log(' create room cb', arguments);
-                    
-                        var newUrl = location.pathname + '?' + name;
-                        if (!err) {
-                            history.replaceState({foo: 'bar'}, null, newUrl);
-                            setRoom(name);
-                        } else {
-                            console.log(err);
-                        }
-                    });
-                    return false;          
-                });
-            }
-
+            setRoom("officehours");
+            
             var button = $('#screenShareButton'),
                 setButton = function (bool) {
                     button.text(bool ? 'share screen' : 'stop sharing');
