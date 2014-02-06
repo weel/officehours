@@ -4,31 +4,14 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A layout example that shows off a responsive product landing page.">
-
-    <title>Landing Page &ndash; Layout Examples &ndash; Pure</title>
-
-    
-
-
-
-
-
-
+    <title>Office hours - The Simple Way</title>
 <link rel="stylesheet" href="vendor/yui-pure-0.3.0-min.css">
-
-
-
-
-
-  
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="css/main-grid-old-ie.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="css/main-grid.css">
     <!--<![endif]-->
-  
-
   
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="css/layouts/marketing-old-ie.css">
@@ -37,7 +20,6 @@
         <link rel="stylesheet" href="css/layouts/marketing.css">
     <!--<![endif]-->
   
-
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
 </head>
@@ -48,17 +30,11 @@
     <div class="splash">
        <style>
             #remotes video {
-                height: 150px;
+                height: 200px;
             }
         </style>
-        <video id="localVideo" style="height: 150px;"></video>
         <div id="remotes"></div>
-        </p>
-        <p>
-             <form id="createRoom">
-            <input id="sessionInput"/>
-            <button type="submit">Create it!</button>
-        </form>
+        <video id="localVideo" style="height: 150px;"></video>
         </p>
     </div>
 </div>
@@ -75,7 +51,7 @@
                     Get Started Quickly
                 </h3>
                 <p>
-                    Open a url, share it, have a laugh!
+                    Get someone else joining https://officehours.app.iterate.no and have a chat!
                 </p>
             </div>
             <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
@@ -93,7 +69,7 @@
                     Feedback
                 </h3>
                 <p>
-                    Feedback is very welcomed!
+                    Feedback is very welcomed! Pull requests are even more welcome. <a href="http://github.com/weel/officehours"> Github repo here</a>
                 </p>
             </div>
             <div class="l-box pure-u-1 pure-u-med-1-2 pure-u-lrg-1-4">
@@ -122,9 +98,11 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
 </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="simplewebrtc.bundle.js"></script>
+
         <script>
             // grab the room from the URL
-            var room = location.search && location.search.split('?')[1];
+
+            var room = '7aff22831b2d25b3e2a545f305d0ea68';
 
             // create our webrtc connection
             var webrtc = new SimpleWebRTC({
@@ -142,18 +120,18 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
             // when it's ready, join if we got a room from the URL
             webrtc.on('readyToCall', function () {
                 // you can name it anything
-                if (room) webrtc.joinRoom(room);
+                console.log("joining room");
+                webrtc.joinRoom('officehours');
             });
             
             // Since we use this twice we put it here
             function setRoom(name) {
                 $('form').remove();
                 $('h1').text(name);
-                $('#subTitle').text('Link to join: ' + location.href);
+                $('#subTitle').text('Link to join: https://officehours.app.iterate.no');
                 $('body').addClass('active');
             }
-
-            setRoom("officehours");
+            setRoom("7aff22831b2d25b3e2a545f305d0ea68");
             
             var button = $('#screenShareButton'),
                 setButton = function (bool) {
@@ -178,10 +156,5 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
                 }
             });
         </script>
-
-
-
-
-
 </body>
 </html>
