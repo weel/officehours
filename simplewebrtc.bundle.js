@@ -13,7 +13,7 @@ function SimpleWebRTC(opts) {
     var self = this;
     var options = opts || {};
     var config = this.config = {
-            url: 'http://signaling.simplewebrtc.com:8888',
+            url: 'https://officehours-signalmaster.app.iterate.no',
             debug: false,
             localVideoEl: '',
             remoteVideosEl: '',
